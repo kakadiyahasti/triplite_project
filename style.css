@@ -1,0 +1,277 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #fceabb; /* Light yellow background */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: #ff8c00; /* Darker Orange */
+    color: #fff;
+    padding-top: 20px;
+    min-height: 70px;
+    border-bottom: #ffcc00 3px solid; /* Bright yellow border */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 40px; /* Adjust logo size */
+    margin-right: 10px;
+}
+
+header h1 {
+    margin: 0;
+    color: #fff;
+}
+
+header nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header nav li {
+    display: inline;
+    padding: 0 15px;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+header a:hover {
+    color: #fceabb; /* Lighter yellow on hover */
+}
+
+/* Homepage Hero Section */
+.homepage-hero {
+    position: relative;
+    height: 80vh; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide overflowing video */
+    color: #fff;
+    text-align: center;
+}
+
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+    filter: brightness(0.7); /* Darken video for text readability */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay for text */
+    border-radius: 8px;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.btn {
+    display: inline-block;
+    color: #fff;
+    background: #ffcc00; /* Bright yellow button */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background: #ff8c00; /* Darker orange on hover */
+}
+
+/* Page Content (for About, Packages, Reviews, Forms) */
+.page-content {
+    padding: 40px 0;
+    background-color: #fff;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.page-content h2 {
+    color: #ff8c00; /* Orange heading */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Package List */
+.package-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.package-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    padding-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-5px);
+}
+
+.package-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.package-card h3 {
+    color: #ff8c00;
+    margin: 15px 0 10px;
+}
+
+.package-card p {
+    padding: 0 15px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Review List */
+.review-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.review-card {
+    background-color: #fdfae3; /* Very light yellow for reviews */
+    border: 1px solid #ffcc00;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.review-card h3 {
+    color: #ff8c00;
+    margin-top: 0;
+}
+
+.review-card .rating {
+    color: #ffd700; /* Gold stars */
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.review-card .reviewer {
+    font-style: italic;
+    text-align: right;
+    color: #777;
+    margin-top: 15px;
+}
+
+/* Forms (Login, Register, Booking) */
+.form-page .simple-form {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #fdfae3; /* Light yellow form background */
+    border: 1px solid #ffcc00;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.simple-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+}
+
+.simple-form input[type="text"],
+.simple-form input[type="email"],
+.simple-form input[type="password"],
+.simple-form input[type="date"],
+.simple-form input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.simple-form button.btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.simple-form p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.message {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background: #ff8c00; /* Darker Orange */
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
