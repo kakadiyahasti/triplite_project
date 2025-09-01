@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Packages - Triplite</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo.png" alt="Triplite Logo">
+                <h1>Triplite</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <div class="container">
+            <h2>Our Amazing Tour Packages</h2>
+            <div class="package-list" id="package-list">
+                </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Triplite. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Fetch packages when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('backend/get_packages.php')
+                .then(response => response.json())
+                .then(packages => {
+                    const packageList = document.getElementById('package-list');
+                    packages.forEach(pkg => {
+                        const packageCard = document.createElement('div');
+                        packageCard.classList.add('package-card');
+                        packageCard.innerHTML = `
+                            <img src="${pkg.image_url || 'img/placeholder.jpg'}" alt="${pkg.name}">
+                            <h3>${pkg.name}</h3>
+                            <p>${pkg.description}</p>
+                            <p><strong>Price: ₹${pkg.price}</strong></p>
+                            <p>Duration: ${pkg.duration}</p>
+                            <a href="booking.html?package_id=${pkg.id}" class="btn">Book Now</a>
+                        `;
+                        packageList.appendChild(packageCard);
+                    });
+                })
+                .catch(error => console.error('Error fetching packages:', error));
+        });
+    </script>
+</body>
+</html>

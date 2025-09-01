@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Package - Triplite</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo.png" alt="Triplite Logo">
+                <h1>Triplite</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content form-page">
+        <div class="container">
+            <h2>Book Your Dream Package</h2>
+            <form action="backend/book_package.php" method="POST" class="simple-form">
+                <label for="package-name">Selected Package:</label>
+                <input type="text" id="package-name" name="package_name" readonly>
+                <input type="hidden" id="package-id" name="package_id">
+
+                <label for="travel-date">Travel Date:</label>
+                <input type="date" id="travel-date" name="travel_date" required>
+
+                <label for="num-travelers">Number of Travelers:</label>
+                <input type="number" id="num-travelers" name="num_travelers" min="1" value="1" required>
+
+                <label for="user-id">Your User ID (for testing):</label>
+                <input type="number" id="user-id" name="user_id" value="1" required>
+
+
+                <button type="submit" class="btn">Confirm Booking</button>
+            </form>
+            <div id="booking-message" class="message"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Triplite. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const packageId = urlParams.get('package_id');
+
+            if (packageId) {
+                // Fetch package details to pre-fill the form
+                fetch(`backend/get_packages.php?id=${packageId}`)
+                    .then(response => response.json())
+                    .then(packageDetails => {
+                        if (packageDetails) {
+                            document.getElementById('package-name').value = packageDetails.name;
+                            document.getElementById('package-id').value = packageDetails.id;
+                        } else {
+                            document.getElementById('package-name').value = 'Package Not Found';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching package details:', error);
+                        document.getElementById('package-name').value = 'Error loading package';
+                    });
+            } else {
+                document.getElementById('package-name').value = 'No package selected';
+            }
+        });
+
+        document.querySelector('.simple-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('backend/book_package.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageDiv = document.getElementById('booking-message');
+                if (data.success) {
+                    messageDiv.textContent = data.message;
+                    messageDiv.style.color = 'green';
+                    this.reset();
+                } else {
+                    messageDiv.textContent = data.message;
+                    messageDiv.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('booking-message').textContent = 'An error occurred. Please try again.';
+                document.getElementById('booking-message').style.color = 'red';
+            });
+        });
+    </script>
+</body>
+</html>
